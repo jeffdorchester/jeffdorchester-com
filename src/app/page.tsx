@@ -13,12 +13,12 @@ const links = {
 export default function Home() {
   return (
     <main>
-      <div className="status" role="status" aria-live="polite">
-        <span className="status-dot" aria-hidden="true" />
-        <span>Available for senior technology leadership roles</span>
-      </div>
-
       <header className="hero">
+        <div className="status" role="status" aria-live="polite">
+          <span className="status-dot" aria-hidden="true" />
+          <span>Available for senior technology leadership roles</span>
+        </div>
+
         <h1>Jeff Dorchester</h1>
         <p className="role">
           Founder-CTO &middot; Industrial Designer Turned Tech Executive
@@ -29,7 +29,12 @@ export default function Home() {
           from.
         </p>
         <div className="hero-cta">
-          <a href={links.resume} className="btn btn-primary">
+          <a
+            href={links.resume}
+            className="btn btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Download resume
           </a>
           <a href={`mailto:${links.email}`} className="btn btn-secondary">
@@ -264,7 +269,12 @@ export default function Home() {
           <a href={`mailto:${links.email}`} className="btn btn-primary">
             Get in touch
           </a>
-          <a href={links.resume} className="btn btn-secondary">
+          <a
+            href={links.resume}
+            className="btn btn-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             View resume
           </a>
         </div>
