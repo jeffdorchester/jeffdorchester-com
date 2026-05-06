@@ -16,7 +16,12 @@ export default function Home() {
       <header className="hero">
         <div className="status" role="status" aria-live="polite">
           <span className="status-dot" aria-hidden="true" />
-          <span>Available for senior technology leadership roles</span>
+          <span className="status-text-full">
+            Available for senior technology leadership roles
+          </span>
+          <span className="status-text-short">
+            Available for senior leadership
+          </span>
         </div>
 
         <h1>Jeff Dorchester</h1>

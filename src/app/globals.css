@@ -121,6 +121,20 @@ main {
   margin-bottom: 3rem;
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+
+.status-text-short {
+  display: none;
+}
+
+@media (max-width: 540px) {
+  .status-text-full {
+    display: none;
+  }
+  .status-text-short {
+    display: inline;
+  }
 }
 
 .status-dot {
