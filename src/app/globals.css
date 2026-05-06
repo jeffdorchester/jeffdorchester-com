@@ -39,6 +39,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'cv11', 'ss01', 'ss03';
+  overflow-x: clip;
 }
 
 body {
@@ -773,10 +774,18 @@ em {
   body {
     padding: 2.5rem 1.25rem 4rem;
   }
-  body::before,
+  body::before {
+    width: 360px;
+    height: 360px;
+    left: -40px;
+    top: -100px;
+    opacity: 0.4;
+  }
   body::after {
-    width: 400px;
-    height: 400px;
+    width: 360px;
+    height: 360px;
+    right: -40px;
+    top: 20%;
     opacity: 0.4;
   }
   .stats {

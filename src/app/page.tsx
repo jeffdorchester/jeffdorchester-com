@@ -188,8 +188,8 @@ export default function Home() {
               <li>SOC 2</li>
               <li>HIPAA-conformant programs</li>
               <li>CIS Critical Security Controls</li>
-              <li>PCI-DSS</li>
               <li>Internal-audit operationalization</li>
+              <li>Public-facing transparency</li>
             </ul>
           </div>
           <div className="cap-block">
@@ -205,7 +205,7 @@ export default function Home() {
           <div className="cap-block">
             <h3>Product engineering</h3>
             <ul>
-              <li>Mobile (iOS, Android, Xamarin)</li>
+              <li>Mobile (iOS, Android, Xamarin, Flutter, Ionic)</li>
               <li>Custom APIs and integrations</li>
               <li>Multi-tenant white-label platforms</li>
               <li>Regulated SaaS</li>
