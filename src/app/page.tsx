@@ -95,13 +95,15 @@ export default function Home() {
           </div>
           <p>
             Behavioral-health platform combining proprietary SaaS with peer
-            support and coaching. Joined as strategic consultant. Shipped a
-            multi-year stalled product to MVP in 90 days, then promoted to CTO.
-            Through a company-wide RIF, ran the entire technology function solo
-            for an extended period: engineering, IT, security, compliance, and
-            endpoint. Delivered SOC 2, HIPAA, and CIS Critical Security Controls
-            in parallel. Materially increased operational leverage through
-            UX-driven workflow redesign. Unlocked a strategic partnership with a
+            support and coaching. Joined as strategic consultant after my
+            iRel8 white-label work for Youturn unlocked their federal
+            contract. Shipped a multi-year stalled product to MVP in 90
+            days, then promoted to CTO. Through a company-wide RIF, ran the
+            entire technology function solo for an extended period:
+            engineering, IT, security, compliance, and endpoint. Delivered
+            SOC 2, HIPAA, and CIS Critical Security Controls in parallel.
+            Materially increased operational leverage through UX-driven
+            workflow redesign. Unlocked a strategic partnership with a
             top-tier US healthcare provider.
           </p>
         </article>
@@ -131,9 +133,11 @@ export default function Home() {
             Bootstrapped peer-to-peer mental-wellness platform built on the
             thesis that anonymity unlocks vulnerability. White-labeled to
             mission-critical partners across mental health, first responders,
-            special forces, and maternal health. Drove a multi-year strategic
-            partnership with Microsoft, including a 12-person Microsoft product
-            team contributed pro bono and the{' '}
+            and special forces. Shipped a 2-week white-label deployment for
+            Youturn Health that helped them win a multi-year federal contract
+            and led directly to my CTO role there. Drove a multi-year
+            strategic partnership with Microsoft, including a 12-person
+            Microsoft product team contributed pro bono and the{' '}
             <a href={links.microsoftTransform}>Microsoft Transform</a> feature
             that headlined the Microsoft homepage for over a month.
           </p>
