@@ -5,65 +5,17 @@ import type { CSSProperties } from 'react';
 
 type Tile = {
   id: number;
-  name: string;
-  items: string[];
+  number: string;
+  label: string;
   color: string;
   freq: number;
 };
 
 const TILES: Tile[] = [
-  {
-    id: 0,
-    name: 'Compliance',
-    items: [
-      'SOC 2',
-      'HIPAA-conformant programs',
-      'CIS Critical Security Controls',
-      'Internal-audit operationalization',
-      'Public-facing transparency',
-    ],
-    color: '#3b82f6',
-    freq: 329.63,
-  },
-  {
-    id: 1,
-    name: 'Cloud & infrastructure',
-    items: [
-      'Microsoft Azure (compute, identity, data)',
-      'Endpoint management',
-      'Observability and monitoring',
-      'Public-facing status pages',
-      'Identity and access',
-    ],
-    color: '#06b6d4',
-    freq: 440,
-  },
-  {
-    id: 2,
-    name: 'Product engineering',
-    items: [
-      'Mobile (iOS, Android, Xamarin, Flutter, Ionic)',
-      'Custom APIs and integrations',
-      'Multi-tenant white-label platforms',
-      'Regulated SaaS',
-      'Full-stack web',
-    ],
-    color: '#22c55e',
-    freq: 554.37,
-  },
-  {
-    id: 3,
-    name: 'Founder operations',
-    items: [
-      'Bootstrapping discipline',
-      'M&A execution (one closed exit)',
-      'IPO-readiness exposure',
-      'Strategic-partnership development',
-      'Board and exec engagement',
-    ],
-    color: '#8b5cf6',
-    freq: 659.25,
-  },
+  { id: 0, number: '27', label: 'Years building', color: '#3b82f6', freq: 329.63 },
+  { id: 1, number: '6', label: 'Companies', color: '#06b6d4', freq: 440 },
+  { id: 2, number: '1', label: 'Clean exit', color: '#22c55e', freq: 554.37 },
+  { id: 3, number: '1', label: 'Near-IPO', color: '#8b5cf6', freq: 659.25 },
 ];
 
 const HINT_TILE = 0;
@@ -80,7 +32,7 @@ type GameState =
   | 'awaiting-input'
   | 'failed';
 
-export default function CapabilitiesGame() {
+export default function StatsGame() {
   const [gameState, setGameState] = useState<GameState>('dormant');
   const [sequence, setSequence] = useState<number[]>([]);
   const [userIndex, setUserIndex] = useState(0);
@@ -118,7 +70,6 @@ export default function CapabilitiesGame() {
     };
   }, [gameState, round]);
 
-  // Cleanup any pending timers on unmount
   useEffect(() => {
     return () => {
       if (longPressTimerRef.current) clearTimeout(longPressTimerRef.current);
@@ -206,7 +157,6 @@ export default function CapabilitiesGame() {
   const handleTap = useCallback(
     (tileId: number) => {
       if (gameState === 'failed') {
-        // tap-to-restart from failed state
         startGame();
         return;
       }
@@ -261,9 +211,8 @@ export default function CapabilitiesGame() {
   }, []);
 
   return (
-    <section className="capabilities" data-game={gameState}>
-      <h2>Capabilities</h2>
-      <div className="cap-grid" role="presentation">
+    <>
+      <section className="stats" data-game={gameState}>
         {TILES.map((tile) => {
           const isHighlighted = highlight === tile.id;
           const isHint = hintActive && tile.id === HINT_TILE && gameState === 'dormant';
@@ -272,7 +221,7 @@ export default function CapabilitiesGame() {
             ['--tile-color' as string]: tile.color,
           } as CSSProperties;
           const classes = [
-            'cap-block',
+            'stat',
             isHighlighted && 'is-lit',
             isHint && 'is-hint',
             isPressing && 'is-pressing',
@@ -293,16 +242,12 @@ export default function CapabilitiesGame() {
               onTouchCancel={handlePressEnd}
               onClick={() => handleTap(tile.id)}
             >
-              <h3>{tile.name}</h3>
-              <ul>
-                {tile.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
+              <div className="stat-number">{tile.number}</div>
+              <div className="stat-label">{tile.label}</div>
             </div>
           );
         })}
-      </div>
+      </section>
 
       {gameState !== 'dormant' && (
         <div className="game-status" aria-live="polite">
@@ -340,6 +285,6 @@ export default function CapabilitiesGame() {
           )}
         </div>
       )}
-    </section>
+    </>
   );
 }
