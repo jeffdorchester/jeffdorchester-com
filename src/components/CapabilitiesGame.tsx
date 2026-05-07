@@ -4,17 +4,65 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 type Tile = {
   id: number;
-  number: string;
-  label: string;
+  name: string;
+  items: string[];
   colorClass: string;
   freq: number;
 };
 
 const TILES: Tile[] = [
-  { id: 0, number: '27', label: 'Years building', colorClass: 'tile-blue', freq: 329.63 },
-  { id: 1, number: '6', label: 'Companies', colorClass: 'tile-cyan', freq: 440 },
-  { id: 2, number: '1', label: 'Clean exit', colorClass: 'tile-green', freq: 554.37 },
-  { id: 3, number: '1', label: 'Near-IPO', colorClass: 'tile-purple', freq: 659.25 },
+  {
+    id: 0,
+    name: 'Compliance',
+    items: [
+      'SOC 2',
+      'HIPAA-conformant programs',
+      'CIS Critical Security Controls',
+      'Internal-audit operationalization',
+      'Public-facing transparency',
+    ],
+    colorClass: 'tile-blue',
+    freq: 329.63,
+  },
+  {
+    id: 1,
+    name: 'Cloud & infrastructure',
+    items: [
+      'Microsoft Azure (compute, identity, data)',
+      'Endpoint management',
+      'Observability and monitoring',
+      'Public-facing status pages',
+      'Identity and access',
+    ],
+    colorClass: 'tile-cyan',
+    freq: 440,
+  },
+  {
+    id: 2,
+    name: 'Product engineering',
+    items: [
+      'Mobile (iOS, Android, Xamarin, Flutter, Ionic)',
+      'Custom APIs and integrations',
+      'Multi-tenant white-label platforms',
+      'Regulated SaaS',
+      'Full-stack web',
+    ],
+    colorClass: 'tile-green',
+    freq: 554.37,
+  },
+  {
+    id: 3,
+    name: 'Founder operations',
+    items: [
+      'Bootstrapping discipline',
+      'M&A execution (one closed exit)',
+      'IPO-readiness exposure',
+      'Strategic-partnership development',
+      'Board and exec engagement',
+    ],
+    colorClass: 'tile-purple',
+    freq: 659.25,
+  },
 ];
 
 const HINT_TILE = 0;
@@ -31,7 +79,7 @@ type GameState =
   | 'awaiting-input'
   | 'failed';
 
-export default function StatsGame() {
+export default function CapabilitiesGame() {
   const [gameState, setGameState] = useState<GameState>('dormant');
   const [sequence, setSequence] = useState<number[]>([]);
   const [userIndex, setUserIndex] = useState(0);
@@ -45,9 +93,9 @@ export default function StatsGame() {
   const longPressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const sequenceTimeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  // Stats grid is the 2x2 game board only on mobile. Activate accordingly.
+  // Capabilities grid is the 2x2 game board only on desktop. Activate accordingly.
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 768px)');
+    const mq = window.matchMedia('(min-width: 769px)');
     setIsActiveViewport(mq.matches);
     const handler = (e: MediaQueryListEvent) => {
       setIsActiveViewport(e.matches);
@@ -56,7 +104,7 @@ export default function StatsGame() {
     return () => mq.removeEventListener('change', handler);
   }, []);
 
-  // Subtle hint pulse on the top-left tile every 20s, only when dormant on mobile
+  // Subtle hint pulse on the top-left tile every 20s, only when dormant on desktop
   useEffect(() => {
     if (gameState !== 'dormant' || !isActiveViewport) {
       setHintActive(false);
@@ -73,15 +121,18 @@ export default function StatsGame() {
   // Apply a body-level fade variable so other sections recede as game advances.
   // Tag which section is the active board so CSS can keep that one at full opacity.
   useEffect(() => {
-    const fade = gameState === 'dormant' ? 0 : Math.min(0.15 + round * 0.07, 0.6);
-    document.body.style.setProperty('--game-fade', String(fade));
-    if (gameState !== 'dormant') {
-      document.body.dataset.gameActive = 'stats';
-    } else if (document.body.dataset.gameActive === 'stats') {
-      delete document.body.dataset.gameActive;
+    if (gameState === 'dormant') {
+      if (document.body.dataset.gameActive === 'capabilities') {
+        document.body.style.removeProperty('--game-fade');
+        delete document.body.dataset.gameActive;
+      }
+      return;
     }
+    const fade = Math.min(0.15 + round * 0.07, 0.6);
+    document.body.style.setProperty('--game-fade', String(fade));
+    document.body.dataset.gameActive = 'capabilities';
     return () => {
-      if (document.body.dataset.gameActive === 'stats') {
+      if (document.body.dataset.gameActive === 'capabilities') {
         document.body.style.removeProperty('--game-fade');
         delete document.body.dataset.gameActive;
       }
@@ -229,14 +280,15 @@ export default function StatsGame() {
   }, []);
 
   return (
-    <>
-      <section className="stats" data-game={gameState}>
+    <section className="capabilities" data-game={gameState}>
+      <h2>Capabilities</h2>
+      <div className="cap-grid" role="presentation">
         {TILES.map((tile) => {
           const isHighlighted = highlight === tile.id;
           const isHint = hintActive && tile.id === HINT_TILE && gameState === 'dormant';
           const isPressing = pressing === tile.id;
           const classes = [
-            'stat',
+            'cap-block',
             tile.colorClass,
             isHighlighted && 'is-lit',
             isHint && 'is-hint',
@@ -257,12 +309,16 @@ export default function StatsGame() {
               onTouchCancel={handlePressEnd}
               onClick={() => handleTap(tile.id)}
             >
-              <div className="stat-number">{tile.number}</div>
-              <div className="stat-label">{tile.label}</div>
+              <h3>{tile.name}</h3>
+              <ul>
+                {tile.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </div>
           );
         })}
-      </section>
+      </div>
 
       {gameState !== 'dormant' && (
         <div className="game-status" aria-live="polite">
@@ -300,6 +356,6 @@ export default function StatsGame() {
           )}
         </div>
       )}
-    </>
+    </section>
   );
 }

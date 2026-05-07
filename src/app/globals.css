@@ -544,15 +544,26 @@ h2::after {
   background: var(--surface-hover);
 }
 
-/* === Stats game tile interactivity === */
+/* === Simon game shared === */
+
+/* Tile color classes (used by both StatsGame on mobile and CapabilitiesGame on desktop) */
+.tile-blue { --tile-color: #3b82f6; }
+.tile-cyan { --tile-color: #06b6d4; }
+.tile-green { --tile-color: #22c55e; }
+.tile-purple { --tile-color: #8b5cf6; }
+
+/* === Stats game tile interactivity (active on mobile) === */
 
 .stat {
-  cursor: pointer;
   -webkit-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   transition: background 0.2s ease;
   position: relative;
+}
+
+.stat.in-game {
+  cursor: pointer;
 }
 
 /* Subtle hint pulse on the top-left tile every 20s — barely there */
@@ -575,13 +586,11 @@ h2::after {
   }
 }
 
-/* Long-press feedback — slow background brighten as the press builds */
 .stat.is-pressing {
   background: var(--surface-hover);
   transition: background 1.5s ease-out;
 }
 
-/* The Simon "lit" state — fills cell with per-tile color via --tile-color */
 .stat.is-lit {
   background: var(--tile-color);
   box-shadow: inset 0 0 32px rgba(255, 255, 255, 0.18),
@@ -597,8 +606,74 @@ h2::after {
   -webkit-text-fill-color: #ffffff !important;
 }
 
-/* Page fade during game — applies to all sections OTHER than .stats */
+/* === Capabilities game tile interactivity (active on desktop) === */
+
+.cap-block {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+
+.cap-block.in-game {
+  cursor: pointer;
+}
+
+.cap-block.is-hint {
+  animation: cap-block-hint 1.2s ease-out;
+}
+
+@keyframes cap-block-hint {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    border-color: var(--border);
+  }
+  45% {
+    box-shadow: 0 0 32px 2px rgba(59, 130, 246, 0.35);
+    border-color: rgba(59, 130, 246, 0.45);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    border-color: var(--border);
+  }
+}
+
+.cap-block.is-pressing {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: var(--surface-hover);
+  transition: border-color 1.5s ease-out, background 1.5s ease-out;
+}
+
+.cap-block.in-game ul {
+  opacity: 0.5;
+  transition: opacity 0.4s ease;
+}
+
+.cap-block.is-lit {
+  background: var(--tile-color);
+  border-color: var(--tile-color);
+  box-shadow: 0 0 56px var(--tile-color),
+    inset 0 0 24px rgba(255, 255, 255, 0.15);
+  transition: background 0.05s ease, border-color 0.05s ease,
+    box-shadow 0.05s ease;
+}
+
+.cap-block.is-lit h3,
+.cap-block.is-lit h3::before,
+.cap-block.is-lit ul li {
+  color: #ffffff !important;
+}
+
+.cap-block.is-lit h3::before {
+  background: #ffffff !important;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+}
+
+/* === Page fade during any active game === */
+/* All sections fade. The active board (stats on mobile, capabilities on desktop)
+   gets opacity restored via the data-game-active attribute on body. */
 .hero,
+.stats,
 .narrative,
 .featured-work,
 .capabilities,
@@ -606,6 +681,11 @@ h2::after {
 .cta-block {
   transition: opacity 0.6s ease;
   opacity: calc(1 - var(--game-fade, 0));
+}
+
+body[data-game-active='stats'] .stats,
+body[data-game-active='capabilities'] .capabilities {
+  opacity: 1;
 }
 
 /* Game status indicator below the grid */

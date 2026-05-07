@@ -1,3 +1,4 @@
+import CapabilitiesGame from '@/components/CapabilitiesGame';
 import StatsGame from '@/components/StatsGame';
 
 const links = {
@@ -169,51 +170,7 @@ export default function Home() {
         </article>
       </section>
 
-      <section className="capabilities">
-        <h2>Capabilities</h2>
-        <div className="cap-grid">
-          <div className="cap-block">
-            <h3>Compliance</h3>
-            <ul>
-              <li>SOC 2</li>
-              <li>HIPAA-conformant programs</li>
-              <li>CIS Critical Security Controls</li>
-              <li>Internal-audit operationalization</li>
-              <li>Public-facing transparency</li>
-            </ul>
-          </div>
-          <div className="cap-block">
-            <h3>Cloud &amp; infrastructure</h3>
-            <ul>
-              <li>Microsoft Azure (compute, identity, data)</li>
-              <li>Endpoint management</li>
-              <li>Observability and monitoring</li>
-              <li>Public-facing status pages</li>
-              <li>Identity and access</li>
-            </ul>
-          </div>
-          <div className="cap-block">
-            <h3>Product engineering</h3>
-            <ul>
-              <li>Mobile (iOS, Android, Xamarin, Flutter, Ionic)</li>
-              <li>Custom APIs and integrations</li>
-              <li>Multi-tenant white-label platforms</li>
-              <li>Regulated SaaS</li>
-              <li>Full-stack web</li>
-            </ul>
-          </div>
-          <div className="cap-block">
-            <h3>Founder operations</h3>
-            <ul>
-              <li>Bootstrapping discipline</li>
-              <li>M&amp;A execution (one closed exit)</li>
-              <li>IPO-readiness exposure</li>
-              <li>Strategic-partnership development</li>
-              <li>Board and exec engagement</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+      <CapabilitiesGame />
 
       <section className="press">
         <h2>Featured in</h2>
