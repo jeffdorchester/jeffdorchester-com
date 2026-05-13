@@ -14,7 +14,7 @@ const TILES: Tile[] = [
   { id: 0, number: '27', label: 'Years building', colorClass: 'tile-blue', freq: 329.63 },
   { id: 1, number: '6', label: 'Companies', colorClass: 'tile-cyan', freq: 440 },
   { id: 2, number: '1', label: 'Clean exit', colorClass: 'tile-green', freq: 554.37 },
-  { id: 3, number: '1', label: 'Near-IPO', colorClass: 'tile-purple', freq: 659.25 },
+  { id: 3, number: '1', label: 'Near IPO', colorClass: 'tile-purple', freq: 659.25 },
 ];
 
 const HINT_TILE = 0;

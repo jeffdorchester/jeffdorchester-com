@@ -57,7 +57,7 @@ export default function Home() {
         <h2>About</h2>
         <p>
           Twenty-seven years building technology companies. Six startups, one
-          acquisition, one near-IPO, a Microsoft Ignite keynote, and most
+          acquisition, one near IPO, a Microsoft Ignite keynote, and most
           recently a multi-year run as the entire technology function at a
           behavioral-health platform serving thousands of patients in active
           care.

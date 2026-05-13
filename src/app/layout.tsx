@@ -6,11 +6,11 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Jeff Dorchester — Founder-CTO',
   description:
-    'Industrial designer turned founder-CTO. 27 years, six companies, one exit, one near-IPO. I build regulated software, and I fix what others have walked away from.',
+    'Industrial designer turned founder-CTO. 27 years, six companies, one exit, one near IPO. I build regulated software, and I fix what others have walked away from.',
   openGraph: {
     title: 'Jeff Dorchester — Founder-CTO',
     description:
-      'Industrial designer turned founder-CTO. 27 years, six companies, one exit, one near-IPO.',
+      'Industrial designer turned founder-CTO. 27 years, six companies, one exit, one near IPO.',
     url: 'https://jeffdorchester.com',
     type: 'website',
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Jeff Dorchester — Founder-CTO',
     description:
-      'Industrial designer turned founder-CTO. 27 years, six companies, one exit, one near-IPO.',
+      'Industrial designer turned founder-CTO. 27 years, six companies, one exit, one near IPO.',
   },
 };
 
