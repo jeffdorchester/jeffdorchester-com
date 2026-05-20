@@ -112,7 +112,7 @@ export default function Home() {
           <div className="work-header">
             <h3>iRel8</h3>
             <span className="work-meta">
-              Co-Founder &amp; CTO &middot; 2017–2024
+              Co-Founder, CTO, CPO &middot; 2017–2024
             </span>
           </div>
           <div className="work-stats">
