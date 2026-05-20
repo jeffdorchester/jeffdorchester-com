@@ -29,7 +29,7 @@ export default function Home() {
 
         <h1>Jeff Dorchester</h1>
         <p className="role">
-          Founder-CTO &middot; Industrial Designer Turned Tech Executive
+          Founder, CTO, CPO &middot; Industrial Designer Turned Tech Executive
         </p>
         <p className="location">Stonington, ME &middot; Remote-first</p>
         <p className="pitch">
